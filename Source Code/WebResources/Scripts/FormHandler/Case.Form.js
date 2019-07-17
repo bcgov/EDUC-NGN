@@ -6,6 +6,7 @@ var Edu = window.Edu || {};
 //This is a managed system view and should not be able to be deleted, so hardcoding should be on
 var CASE_LOOKUP_VIEW = "{A2D479C5-53E3-4C69-ADDD-802327E67A0D}";
 
+
 Edu.filterSDContacts = function (executionContext) {
     //get form context
     var formContext = executionContext.getFormContext();
