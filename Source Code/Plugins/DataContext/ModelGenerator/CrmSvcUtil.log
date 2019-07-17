@@ -1,0 +1,39 @@
+CrmSvcUtil Error: 2 : Exiting program with exit code 2 due to exception : System.IO.FileNotFoundException: Could not load file or assembly 'Microsoft.Xrm.Sdk.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. The system cannot find the file specified.
+File name: 'Microsoft.Xrm.Sdk.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'
+   at Microsoft.Xrm.Tooling.Connector.CrmLogEntry.GetExceptionDetail(Object objException, StringBuilder sw, Int32 level, StringBuilder lastErrorMsg)
+   at Microsoft.Xrm.Tooling.Connector.CrmLogEntry.Log(String message, TraceEventType eventType, Exception exception)
+   at Microsoft.Xrm.Tooling.Connector.CrmWebSvc.InitCRM2011Service()
+   at Microsoft.Xrm.Tooling.Connector.CrmWebSvc.GetCachedCRMService(CrmWebSvc& ConnectionObject)
+   at Microsoft.Xrm.Tooling.Connector.CrmWebSvc.IntilizeService(CrmWebSvc& ConnectionObject)
+   at Microsoft.Xrm.Tooling.Connector.CrmServiceClient.CreateCRMWebServiceConnection(OrganizationServiceProxy externalOrgServiceProxy, AuthenticationType requestedAuthType, String hostName, String port, String orgName, NetworkCredential credential, String userId, SecureString password, String domain, String CrmOnlineRegion, String claimsHomeRealm, Boolean useSsl, Boolean useUniqueInstance, OrganizationDetail orgDetail, UserIdentifier user, String clientId, Uri redirectUri, PromptBehavior promptBehavior, String tokenCachePath, OrganizationWebProxyClient externalOrgWebProxyClient)
+   at Microsoft.Xrm.Tooling.Connector.CrmServiceClient.ConnectToCrmWebService(String crmConnectionString)
+   at Microsoft.Crm.Services.Utility.SdkMetadataProviderService.CreateOrganizationServiceEndpoint()
+   at Microsoft.Crm.Services.Utility.SdkMetadataProviderService.LoadMetadata(IServiceProvider service)
+   at Microsoft.Crm.Services.Utility.CrmSvcUtil.Run()
+   at Microsoft.Crm.Services.Utility.CrmSvcUtil.Main(String[] args)
+
+WRN: Assembly binding logging is turned OFF.
+To enable assembly bind failure logging, set the registry value [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD) to 1.
+Note: There is some performance penalty associated with assembly bind failure logging.
+To turn this feature off, remove the registry value [HKLM\Software\Microsoft\Fusion!EnableLog].
+
+CrmSvcUtil Error: 2 : ===== DETAIL ======
+CrmSvcUtil Error: 2 : Source	: Microsoft.Xrm.Tooling.Connector
+Method	: GetExceptionDetail
+Date	: 2:19:51 PM
+Time	: 1/31/2018
+Error	: Could not load file or assembly 'Microsoft.Xrm.Sdk.Deployment, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. The system cannot find the file specified.
+Stack Trace	: at Microsoft.Xrm.Tooling.Connector.CrmLogEntry.GetExceptionDetail(Object objException, StringBuilder sw, Int32 level, StringBuilder lastErrorMsg)
+   at Microsoft.Xrm.Tooling.Connector.CrmLogEntry.Log(String message, TraceEventType eventType, Exception exception)
+   at Microsoft.Xrm.Tooling.Connector.CrmWebSvc.InitCRM2011Service()
+   at Microsoft.Xrm.Tooling.Connector.CrmWebSvc.GetCachedCRMService(CrmWebSvc& ConnectionObject)
+   at Microsoft.Xrm.Tooling.Connector.CrmWebSvc.IntilizeService(CrmWebSvc& ConnectionObject)
+   at Microsoft.Xrm.Tooling.Connector.CrmServiceClient.CreateCRMWebServiceConnection(OrganizationServiceProxy externalOrgServiceProxy, AuthenticationType requestedAuthType, String hostName, String port, String orgName, NetworkCredential credential, String userId, SecureString password, String domain, String CrmOnlineRegion, String claimsHomeRealm, Boolean useSsl, Boolean useUniqueInstance, OrganizationDetail orgDetail, UserIdentifier user, String clientId, Uri redirectUri, PromptBehavior promptBehavior, String tokenCachePath, OrganizationWebProxyClient externalOrgWebProxyClient)
+   at Microsoft.Xrm.Tooling.Connector.CrmServiceClient.ConnectToCrmWebService(String crmConnectionString)
+   at Microsoft.Crm.Services.Utility.SdkMetadataProviderService.CreateOrganizationServiceEndpoint()
+   at Microsoft.Crm.Services.Utility.SdkMetadataProviderService.LoadMetadata(IServiceProvider service)
+   at Microsoft.Crm.Services.Utility.CrmSvcUtil.Run()
+   at Microsoft.Crm.Services.Utility.CrmSvcUtil.Main(String[] args)
+======================================================================================================================
+
+CrmSvcUtil Error: 2 : Exiting Microsoft.Crm.Services.Utility.ICommandLineArgumentSource.OnInvalidArgument: Found string help in arguments array that could not be parsed.

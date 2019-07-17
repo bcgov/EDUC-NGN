@@ -1,0 +1,1 @@
+CrmSvcUtil.exe /url:https://ngndev.api.crm3.dynamics.com/XRMServices/2011/Organization.svc /out:..\GeneratedContext.cs /username:dev1@knowzone.onmicrosoft.com /password:KZLeigh14 /servicecontextname:CRMContext /namespace:NGN.DataContext

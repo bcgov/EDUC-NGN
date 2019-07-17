@@ -1,0 +1,1 @@
+CrmSvcUtil.exe /url:https://educdev.api.crm3.dynamics.com/XRMServices/2011/Organization.svc /out:..\GeneratedContext.cs /username:deanna.beauchamp@gov.bc.ca /password:IDIRRainyDays123! /servicecontextname:CRMContext /namespace:NGN.DataContext
