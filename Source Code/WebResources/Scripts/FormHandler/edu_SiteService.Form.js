@@ -18,13 +18,13 @@ Edu.ShowHideVendorTypeSection = function (executionContext) {
             function success(result) {
                 if (result.edu_vendortype === 100000000) {
                     //Show tab_vendor_section_telus
-                    formContext.ui.tabs.get("tab_vendor").sections.get("tab_vendor_section_telus").setVisible(true);
-                    formContext.ui.tabs.get("tab_vendor").sections.get("tab_vendor_section_av").setVisible(false);
+                    formContext.ui.tabs.get("tab_general").sections.get("tab_vendor_section_telus").setVisible(true);
+                    formContext.ui.tabs.get("tab_general").sections.get("tab_vendor_section_av").setVisible(false);
                 }
                 else {
                     //Show tab_vendor_section_av
-                    formContext.ui.tabs.get("tab_vendor").sections.get("tab_vendor_section_telus").setVisible(false);
-                    formContext.ui.tabs.get("tab_vendor").sections.get("tab_vendor_section_av").setVisible(true);
+                    formContext.ui.tabs.get("tab_general").sections.get("tab_vendor_section_telus").setVisible(false);
+                    formContext.ui.tabs.get("tab_general").sections.get("tab_vendor_section_av").setVisible(true);
                 }
             },
             function (error) {
@@ -35,6 +35,8 @@ Edu.ShowHideVendorTypeSection = function (executionContext) {
     else {
         //hide vendor tab
         formContext.ui.tabs.get("tab_vendor").setVisible(false);
+        formContext.ui.tabs.get("tab_general").sections.get("tab_vendor_section_telus").setVisible(false);
+        formContext.ui.tabs.get("tab_general").sections.get("tab_vendor_section_av").setVisible(false);
     }
 
 

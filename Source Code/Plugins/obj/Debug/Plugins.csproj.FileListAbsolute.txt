@@ -8,3 +8,12 @@ C:\Projects\NGN\Source Code\Repos\Plugins\obj\Debug\Plugins.csproj.CopyComplete
 C:\Projects\NGN\Source Code\Repos\Plugins\obj\Debug\NGN.Plugins.dll
 C:\Projects\NGN\Source Code\Repos\Plugins\obj\Debug\NGN.Plugins.pdb
 C:\Projects\NGN\Source Code\Repos\Plugins\obj\Debug\Plugins.csprojAssemblyReference.cache
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\bin\Debug\NGN.Plugins.dll
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\bin\Debug\NGN.Plugins.pdb
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\bin\Debug\Microsoft.Crm.Sdk.Proxy.dll
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\bin\Debug\Microsoft.IdentityModel.dll
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\bin\Debug\Microsoft.Xrm.Sdk.dll
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\obj\Debug\Plugins.csproj.CoreCompileInputs.cache
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\obj\Debug\Plugins.csproj.CopyComplete
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\obj\Debug\NGN.Plugins.dll
+C:\Projects\NGN\EDUC-NGN\Source Code\Plugins\obj\Debug\NGN.Plugins.pdb

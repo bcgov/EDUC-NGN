@@ -7,10 +7,18 @@ var Edu = window.Edu || {};
 var CASE_LOOKUP_VIEW = "{A2D479C5-53E3-4C69-ADDD-802327E67A0D}";
 
 Edu.filterSDContacts = function (executionContext) {
+
     //get form context
     var formContext = executionContext.getFormContext();
-    //limit lookup to only contacts
-    formContext.getControl("customerid").setEntityTypes(["contact"]);
+
+    //Get Case Type
+    var type = formContext.getAttribute("edu_casetype").getValue();
+
+    //If type is Service Request or Incident
+    if (type === 100000001 || type === 100000000) {
+        //limit lookup to only contacts
+        formContext.getControl("customerid").setEntityTypes(["contact"]);
+    }
 
     //if school district isn't populated, don't continue
     if (formContext.getAttribute("edu_schooldistrict").getValue() === null) return;
@@ -91,33 +99,77 @@ Edu.RetriveServiceCost = function (executionContext) {
 }
 
 // Function to hide and show Sections depending on Service Type (Service and Incident)
-// Runs: On Load and On change of Case Type
+// Runs: on load and on change of Case Type
 Edu.hideShowCaseSection = function (executionContext) {
+
+
 
     // Get the Form Context
     var formContext = executionContext.getFormContext();
 
+
+
     //Get the Case Category
     var caseCat = formContext.getAttribute("edu_casetype").getValue();
     var tabSummary = formContext.ui.tabs.get("tab_summary");
-    var secService = tabSummary.sections.get("sec_seriveoverview"); 
+    var secService = tabSummary.sections.get("sec_seriveoverview");
     var secIncident = tabSummary.sections.get("sec_incidentoverview");
+    var tabModelAndCosts = formContext.ui.tabs.get("tab_ModelandCosts");
+    var tabSDApproval = formContext.ui.tabs.get("tab_sdapproval");
+    var tabServiceReq = formContext.ui.tabs.get("tab_servicerequest");
     var typeValService = 100000001;
     var typeValticket = 100000000;
     var typeValFujitsu = 100000002;
+
+
 
     // Depending on Category, show and hide fields
     if (caseCat == typeValService) {
         //case is service type
         secService.setVisible(true);
         secIncident.setVisible(false);
+        tabModelAndCosts.setVisible(true);
+        tabSDApproval.setVisible(true);
+        tabServiceReq.setVisible(true);
     } else if ((caseCat == typeValticket) || (caseCat == typeValFujitsu)) {
         //case is incident type
         secService.setVisible(false);
         secIncident.setVisible(true);
+        tabModelAndCosts.setVisible(false);
+        tabSDApproval.setVisible(false);
+        tabServiceReq.setVisible(false);
     } else {
         //case has no type
         secService.setVisible(false);
         secIncident.setVisible(false);
+        tabModelAndCosts.setVisible(false);
+        tabSDApproval.setVisible(false);
+        tabServiceReq.setVisible(false);
+    }
+}
+
+
+
+// Function to lock and clear the subcatehory depending on category
+// Runs: on load and on change of case catgory
+Edu.caseCategoryOnLoadandChange = function (executionContext) {
+
+
+
+    var formContext = executionContext.getFormContext();
+    var categoryAtr = formContext.getAttribute("edu_category");
+    var subCategoryAtr = formContext.getAttribute("edu_subcategory");
+    var subCategoryCtrl = formContext.getControl("edu_subcategory");
+    var categoryVal = categoryAtr.getValue();
+
+
+
+    if (categoryVal == null) {
+        //clear and disable subcategory field
+        subCategoryAtr.setValue(null);
+        subCategoryCtrl.setDisabled(true);
+    } else {
+        //enable subcat field
+        subCategoryCtrl.setDisabled(false);
     }
 }

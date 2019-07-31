@@ -77,6 +77,7 @@
     <Compile Include="CalculateTargetSLADate.cs" />
     <Compile Include="CreateMonthlyFinancialLineItemRecords.cs" />
     <Compile Include="CreateFinancialMonthlySummariesForVendor.cs" />
+    <Compile Include="CreateUpdateFujitsuCase.cs" />
     <Compile Include="FindAndReturnFujitsuCase.cs" />
     <Compile Include="GetRecommendedServiceFromModel.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
