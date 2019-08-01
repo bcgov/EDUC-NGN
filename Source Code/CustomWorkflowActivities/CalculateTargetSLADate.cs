@@ -16,7 +16,7 @@ namespace NGN
     {
         //Define the properties
         [Input("Start Date")]
-        public InArgument<DateTime> input_startDate { get; set; }
+        public InArgument<DateTime> input_startDate { get; set; } 
 
         [Input("Number of Days")]
         public InArgument<int> input_numberOfDays { get; set; }
