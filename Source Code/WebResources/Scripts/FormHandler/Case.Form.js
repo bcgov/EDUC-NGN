@@ -123,12 +123,8 @@ Edu.RetriveServiceCost = function (executionContext) {
 // Runs: on load and on change of Case Type
 Edu.hideShowCaseSection = function (executionContext) {
 
-
-
     // Get the Form Context
     var formContext = executionContext.getFormContext();
-
-
 
     //Get the Case Category
     var caseCat = formContext.getAttribute("edu_casetype").getValue();
@@ -141,8 +137,6 @@ Edu.hideShowCaseSection = function (executionContext) {
     var typeValService = 100000001;
     var typeValticket = 100000000;
     var typeValFujitsu = 100000002;
-
-
 
     // Depending on Category, show and hide fields
     if (caseCat == typeValService) {
@@ -169,21 +163,15 @@ Edu.hideShowCaseSection = function (executionContext) {
     }
 }
 
-
-
 // Function to lock and clear the subcatehory depending on category
 // Runs: on load and on change of case catgory
 Edu.caseCategoryOnLoadandChange = function (executionContext) {
-
-
 
     var formContext = executionContext.getFormContext();
     var categoryAtr = formContext.getAttribute("edu_category");
     var subCategoryAtr = formContext.getAttribute("edu_subcategory");
     var subCategoryCtrl = formContext.getControl("edu_subcategory");
     var categoryVal = categoryAtr.getValue();
-
-
 
     if (categoryVal == null) {
         //clear and disable subcategory field
