@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript" src="../../ClientGlobalContext.js.aspx"></script>
+    <script src="../Scripts/Common/jquery-3.4.1.min.js" type="text/javascript"></script>  
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            font-size:14px;
+        }
+        .label {
+            width:150px;
+        }
+        .row {
+            display:flex;
+        }
+        .validationErrors{
+            color:red;
+            display:none;
+        }
+    </style>
+    <script type="text/javascript">
+        function validate() {
+            //Confirm form is filled out
+            var isValid = true;
+
+            var resolution = $("#txtResolutionReason").val();
+            var time = $("#txtResolutionTime").val();
+
+
+            if (isEmpty(resolution)) {
+                $("#errors").append("<li>Resolution</li>");
+                isValid = false;
+            }
+
+            if (isEmpty(time)) {
+                $("#errors").append("<li>Time</li>");
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                $(".validationErrors").show();
+            }
+
+            return isValid;
+        }
+        function isEmpty(value) {
+            return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
+        }
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+        $(document).ready(function () {
+            debugger;
+            var showCreateOrder = getParameterByName("data");
+
+            if (showCreateOrder == 'true') {
+                $(".createOrder").show();
+                $("#chkCreateOrder").prop('checked', true);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="validationErrors">
+        <p>The following fields are required:</p>
+        <ul id="errors"></ul>
+    </div>
+    <div class="row">
+        <div class="label">
+            <label for="txtResolutionReason">Resolution:</label>
+        </div>
+        <div>
+            <textarea rows="5" name="txtResolutionReason" id="txtResolutionReason"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="label">
+            <label for="txtResolutionTime">Time (in minutes):</label>
+        </div>
+        <div>
+            <input type="number" name="txtResolutionTime" id="txtResolutionTime" min="0" step="1" />
+        </div>
+    </div>
+    <div class="row createOrder" style="display:none;">
+        <div class="label">
+            <label for="chkCreateOrder">Create Order?</label>
+        </div>
+        <div>
+            <input type="checkbox" name="chkCreateOrder" id="chkCreateOrder"/>
+        </div>
+    </div>
+</body>
+</html>

@@ -5,6 +5,27 @@ var Edu = window.Edu || {};
 //Hardcoded to Case Lookup View 
 //This is a managed system view and should not be able to be deleted, so hardcoding should be on
 var CASE_LOOKUP_VIEW = "{A2D479C5-53E3-4C69-ADDD-802327E67A0D}";
+var CASE_BPF_STATUS;
+Edu.caseLoad = function (executionContext) {
+    //get form context
+    //debugger;
+    var formContext = executionContext.getFormContext();
+    //get current bpf status
+    CASE_BPF_STATUS = formContext.data.process.getStatus();
+    formContext.data.process.addOnProcessStatusChange(EduStatusOnChange);
+}
+
+EduStatusOnChange = function (executionContext) {
+    var formContext = executionContext.getFormContext();
+    //var stagename = Xrm.Page.data.process.getActiveStage().getName();
+    debugger;
+    var status = formContext.data.process.getStatus();
+    
+    if (status == 'finished' && status !== CASE_BPF_STATUS) {
+        //Mscrm.OpportunityCommandActions.opportunityClose(1);
+        alert('finished clicked');
+    }
+}
 
 Edu.filterSDContacts = function (executionContext) {
 
