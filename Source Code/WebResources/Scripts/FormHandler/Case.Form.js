@@ -102,20 +102,32 @@ Edu.RetriveServiceCost = function (executionContext) {
     // Get the Form Context
     var formContext = executionContext.getFormContext();
 
-    //Get Service Cost
-    if (formContext.getAttribute("edu_service").getValue() != null) {
-        var serviceId = (formContext.getAttribute("edu_service").getValue()[0].id).replace(/[{}]/g, "");
-        var serviceOptions = "?$select=edu_cost";
+    // Retrieve Vendor Ref
+    var vendorRef = formContext.getAttribute("edu_vendor").getValue();
+    var serviceCost = formContext.getAttribute("edu_service").getValue();
 
-        //Get and Set Service Cost
-        Xrm.WebApi.retrieveRecord("edu_service", serviceId, serviceOptions).then(
-            function success(result) {
-                formContext.getAttribute("edu_totalmonthlycost").setValue(result.edu_cost);
-            },
-            function (error) {
-                alert("There was an error reading the Service & Cost.");
+    // Ensure that the vendor lookup has a value
+    if (vendorRef != null) {
+
+        // Retrieve service cost if the vendor is Telus and the service cost is empty (fires once)
+        if (vendorRef.name == "Telus" && serviceCost == null) {
+
+            // Get Service Cost
+            if (formContext.getAttribute("edu_service").getValue() != null) {
+                var serviceId = (formContext.getAttribute("edu_service").getValue()[0].id).replace(/[{}]/g, "");
+                var serviceOptions = "?$select=edu_cost";
+
+                // Get and Set Service Cost
+                Xrm.WebApi.retrieveRecord("edu_service", serviceId, serviceOptions).then(
+                    function success(result) {
+                        formContext.getAttribute("edu_totalmonthlycost").setValue(result.edu_cost);
+                    },
+                    function (error) {
+                        alert("There was an error reading the Service & Cost.");
+                    }
+                );
             }
-        );
+        }
     }
 }
 
@@ -126,7 +138,7 @@ Edu.hideShowCaseSection = function (executionContext) {
     // Get the Form Context
     var formContext = executionContext.getFormContext();
 
-    //Get the Case Category
+    // Get the Case Category
     var caseCat = formContext.getAttribute("edu_casetype").getValue();
     var tabSummary = formContext.ui.tabs.get("tab_summary");
     var secService = tabSummary.sections.get("sec_seriveoverview");
@@ -139,27 +151,33 @@ Edu.hideShowCaseSection = function (executionContext) {
     var typeValFujitsu = 100000002;
 
     // Depending on Category, show and hide fields
-    if (caseCat == typeValService) {
-        //case is service type
-        secService.setVisible(true);
-        secIncident.setVisible(false);
-        tabModelAndCosts.setVisible(true);
-        tabSDApproval.setVisible(true);
-        tabServiceReq.setVisible(true);
-    } else if ((caseCat == typeValticket) || (caseCat == typeValFujitsu)) {
-        //case is incident type
-        secService.setVisible(false);
-        secIncident.setVisible(true);
-        tabModelAndCosts.setVisible(false);
-        tabSDApproval.setVisible(false);
-        tabServiceReq.setVisible(false);
-    } else {
-        //case has no type
-        secService.setVisible(false);
-        secIncident.setVisible(false);
-        tabModelAndCosts.setVisible(false);
-        tabSDApproval.setVisible(false);
-        tabServiceReq.setVisible(false);
+    switch (caseCat) {
+        case typeValService:
+            // Case is of type service request
+            secService.setVisible(true);
+            secIncident.setVisible(false);
+            tabModelAndCosts.setVisible(true);
+            tabSDApproval.setVisible(true);
+            tabServiceReq.setVisible(true);
+            break;
+
+        case typeValticket:
+        case typeValFujitsu:
+            // Case is of type incident
+            secService.setVisible(false);
+            secIncident.setVisible(true);
+            tabModelAndCosts.setVisible(false);
+            tabSDApproval.setVisible(false);
+            tabServiceReq.setVisible(false);
+            break;
+
+        //Case has no type
+        default:
+            secService.setVisible(false);
+            secIncident.setVisible(false);
+            tabModelAndCosts.setVisible(false);
+            tabSDApproval.setVisible(false);
+            tabServiceReq.setVisible(false);
     }
 }
 
