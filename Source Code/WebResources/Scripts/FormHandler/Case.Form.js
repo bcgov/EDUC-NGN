@@ -105,13 +105,12 @@ Edu.RetriveServiceCost = function (executionContext) {
 
     // Retrieve Vendor Ref
     var vendorRef = formContext.getAttribute("edu_vendor").getValue();
-    var serviceCost = formContext.getAttribute("edu_service").getValue();
 
     // Ensure that the vendor lookup has a value
     if (vendorRef != null) {
 
         // Retrieve service cost if the vendor is Telus and the service cost is empty (fires once)
-        if (vendorRef.name == "Telus" && serviceCost == null) {
+        if (vendorRef.name == "TELUS") {
 
             // Get Service Cost
             if (formContext.getAttribute("edu_service").getValue() != null) {
@@ -147,14 +146,16 @@ Edu.hideShowCaseSection = function (executionContext) {
     var tabModelAndCosts = formContext.ui.tabs.get("tab_ModelandCosts");
     var tabSDApproval = formContext.ui.tabs.get("tab_sdapproval");
     var tabServiceReq = formContext.ui.tabs.get("tab_servicerequest");
+
+    // Case type values
     var typeValService = 100000001;
     var typeValticket = 100000000;
     var typeValFujitsu = 100000002;
 
     // Depending on Category, show and hide fields
     switch (caseCat) {
+       // Case is of type service request
         case typeValService:
-            // Case is of type service request
             secService.setVisible(true);
             secIncident.setVisible(false);
             tabModelAndCosts.setVisible(true);
@@ -162,9 +163,9 @@ Edu.hideShowCaseSection = function (executionContext) {
             tabServiceReq.setVisible(true);
             break;
 
+        // Case is of type incident
         case typeValticket:
         case typeValFujitsu:
-            // Case is of type incident
             secService.setVisible(false);
             secIncident.setVisible(true);
             tabModelAndCosts.setVisible(false);
@@ -199,5 +200,32 @@ Edu.caseCategoryOnLoadandChange = function (executionContext) {
     } else {
         //enable subcat field
         subCategoryCtrl.setDisabled(false);
+    }
+}
+
+// Function to show and hide resolved feilds and sections  section in summary
+// Runs: on load
+Edu.ShowHideCaseResolutionDetails = function (executionContext) {
+
+    var formContext = executionContext.getFormContext();
+    var stateCode = formContext.getAttribute("statecode");
+    var tabSummary = formContext.ui.tabs.get("tab_summary");
+    var secResolveDetails = tabSummary.sections.get("sec_caseresolutiondetails");
+    var createdOrderControl = formContext.getControl(arg);
+
+    var caseCat = formContext.getAttribute("edu_casetype").getValue();
+
+    switch (stateCode) {
+        // Case is resolved or cancelled - show section
+        case 1:
+        case 2:
+            secResolveDetails.setVisible(true);
+            if (caseCat == 100000001) createdOrderControl.setVisible(true);
+            break;
+
+        // Case is active - hide section
+        default:
+            secResolveDetails.setVisible(false);
+            createdOrderControl.setVisible(false);
     }
 }
