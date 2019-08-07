@@ -18,12 +18,13 @@ Edu.caseLoad = function (executionContext) {
 EduStatusOnChange = function (executionContext) {
     var formContext = executionContext.getFormContext();
     //var stagename = Xrm.Page.data.process.getActiveStage().getName();
-    debugger;
+    //debugger;
     var status = formContext.data.process.getStatus();
     
     if (status == 'finished' && status !== CASE_BPF_STATUS) {
         //Mscrm.OpportunityCommandActions.opportunityClose(1);
-        alert('finished clicked');
+        //alert('finished clicked');
+        Edu.Case.ResolveIncident(formContext);
     }
 }
 

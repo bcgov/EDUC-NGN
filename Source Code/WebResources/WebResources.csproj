@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Apps\CaseResolution.html" />
+    <Content Include="Scripts\Common\Edu.Case.js" />
     <Content Include="Scripts\Common\Edu.Common.js" />
     <Content Include="Scripts\FormHandler\Case.Form.js" />
     <Content Include="Scripts\FormHandler\Contact.Form.js" />
