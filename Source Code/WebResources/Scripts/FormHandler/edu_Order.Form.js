@@ -1,4 +1,6 @@
-﻿function OrderTypeFieldLogic(executionContext) {
+﻿var Edu = window.Edu || {};
+
+Edu.OrderTypeFieldLogic = function (executionContext) {
 
     var formContext = executionContext.getFormContext();
 
@@ -71,3 +73,26 @@
             formContext.getAttribute(fn_reqservice).setRequiredLevel("none");
     }
 }
+
+Edu.SetApprovedBy = function (executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    //get Approved field
+    var approvalReason = formContext.getAttribute("edu_approvalreason").getValue();
+
+    if (approvalReason === 100000000) {
+        //set approved by to current user
+        var userSettings = Xrm.Utility.getGlobalContext().userSettings; // userSettings is an object with user information.
+        var currentUserId = userSettings.userId; // The user's unique id
+        var currentUserName = userSettings.userName;
+
+        var lookupVal = new Array();
+        lookupVal[0] = new Object();
+        lookupVal[0].id = currentUserId;
+        lookupVal[0].name = currentUserName;
+        lookupVal[0].entityType = "systemuser";
+
+        formContext.getAttribute("edu_approvedby").setValue(lookupVal);
+    }
+}
+

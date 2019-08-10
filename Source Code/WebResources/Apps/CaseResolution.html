@@ -15,6 +15,7 @@
         }
         .row {
             display:flex;
+            padding-bottom:2px;
         }
         .validationErrors{
             color:red;
@@ -70,6 +71,19 @@
     <div class="validationErrors">
         <p>The following fields are required:</p>
         <ul id="errors"></ul>
+    </div>
+    <div class="row">
+        <div class="label">
+            <label for="ddlStatus">Status:</label>
+        </div>
+        <div>
+            <select id="ddlStatus" name="ddlStatus">
+                <option value="1000">Information Provided</option>
+                <option value="5">Problem Solved</option>
+                <option value="100000001">Order Created</option>
+                <option value="100000000">Closed</option>
+            </select>
+        </div>
     </div>
     <div class="row">
         <div class="label">

@@ -37,8 +37,10 @@ saveResolvedIncident = function () {
         var reason = Alert.getIFrameWindow().document.getElementById("txtResolutionReason").value;
         var time = Alert.getIFrameWindow().document.getElementById("txtResolutionTime").value;
         var createOrder = Alert.getIFrameWindow().document.getElementById("chkCreateOrder").checked;
+        var statusControl = Alert.getIFrameWindow().document.getElementById("ddlStatus");
+        var status = statusControl.options[statusControl.selectedIndex].value;
 
-        Edu.Case.ResolveCase(reason, time, createOrder);
+        Edu.Case.ResolveCase(reason, time, createOrder, status);
         //Close Popup
         Alert.hide();
         return;
@@ -46,7 +48,7 @@ saveResolvedIncident = function () {
 
 }
 
-Edu.Case.ResolveCase = function (resolution, time, createOrder) {
+Edu.Case.ResolveCase = function (resolution, time, createOrder, status) {
     //debugger;
     var Id = GlobalFormContext.data.entity.getId().replace('{', '').replace('}', '');
 
@@ -54,16 +56,18 @@ Edu.Case.ResolveCase = function (resolution, time, createOrder) {
     var parameters = {
         CreateOrder: createOrder,
         Resolution: resolution,
-        Time: time
+        Time: time,
+        Status: status
     }
 
-    Edu.request("POST", caseUri + "/Microsoft.Dynamics.CRM.edu_ResolveCase", parameters).then(function (value) {
+    Edu.Case.Request("POST", caseUri + "/Microsoft.Dynamics.CRM.edu_ResolveCase", parameters).then(function (value) {
         //alert(value);
         //TODO: Refresh Page
         GlobalFormContext.data.refresh(false);
         // expected output: "foo"
     }, function (err) {
-        alert("There was an error resolving the case.  Details: " + err); // Error: "It broke"
+        //debugger;
+        alert("There was an error resolving the case.  Details: " + err); 
     });
 }
 
