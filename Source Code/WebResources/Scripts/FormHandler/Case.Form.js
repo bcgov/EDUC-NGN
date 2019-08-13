@@ -110,7 +110,7 @@ Edu.RetriveServiceCost = function (executionContext) {
     if (vendorRef != null) {
 
         // Retrieve service cost if the vendor is Telus and the service cost is empty (fires once)
-        if (vendorRef.name == "TELUS") {
+        if (vendorRef.name.toLowerCase() == "telus") {
 
             // Get Service Cost
             if (formContext.getAttribute("edu_service").getValue() != null) {
