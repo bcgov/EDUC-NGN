@@ -110,7 +110,7 @@ Edu.RetriveServiceCost = function (executionContext) {
     if (vendorRef != null) {
 
         // Retrieve service cost if the vendor is Telus and the service cost is empty (fires once)
-        if (vendorRef.name.toLowerCase() == "telus") {
+        if (vendorRef[0].name.toLowerCase() == "telus") {
 
             // Get Service Cost
             if (formContext.getAttribute("edu_service").getValue() != null) {
@@ -211,7 +211,7 @@ Edu.ShowHideCaseResolutionDetails = function (executionContext) {
     var stateCode = formContext.getAttribute("statecode");
     var tabSummary = formContext.ui.tabs.get("tab_summary");
     var secResolveDetails = tabSummary.sections.get("sec_caseresolutiondetails");
-    var createdOrderControl = formContext.getControl(arg);
+    var createdOrderControl = formContext.getControl("edu_createdorderid");
 
     var caseCat = formContext.getAttribute("edu_casetype").getValue();
 
